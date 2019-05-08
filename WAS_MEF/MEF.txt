@@ -1,4 +1,0 @@
-Path=/home/princee/WebSphere/AppServer85
-User=princee
-Extractor_loc=/home/princee/Desktop/MEFEXTRACT
-~                           
