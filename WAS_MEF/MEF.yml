@@ -1,0 +1,21 @@
+- hosts: all
+  become: True
+  become_method: sudo
+  gather_facts: no
+
+  vars:
+    InputFile : /home/'{{ ansible_user }}'/MEF.txt
+
+  tasks:
+       - name: Fetching path
+         shell: cat '{{ InputFile }}' |grep -i Path |awk -F "=" '{print $2}'
+         register: path
+
+       - name: Fetching MEF Extractor location
+         shell: cat '{{ InputFile }}' |grep -i Extractor_Loc |awk -F "=" '{print $2}'
+         register: Extractor_Loc
+
+       - name: Execute MEF
+         shell: sh '{{ Extractor_Loc.stdout }}'/iam_was_extract.sh -wasPath '{{ path.stdout }}' 
+
+
